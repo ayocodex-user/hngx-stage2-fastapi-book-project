@@ -31,5 +31,5 @@ jobs:
           source venv/bin/activate &&
           pip3 install -r requirements.txt &&
           sudo systemctl stop fastapi_nginx || true &&
-          sudo systemctl start fastapi_nginx 
+          sudo systemctl start fastapi_nginx
         EOF
