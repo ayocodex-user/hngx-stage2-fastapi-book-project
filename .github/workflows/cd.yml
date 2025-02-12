@@ -24,13 +24,14 @@ jobs:
     - name: Deploy Application to EC2 
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+          cd /home/ubuntu &&
           git clone https://github.com/ojutalayomi/hngx-stage2-fastapi-book-project.git || true &&
           cd hngx-stage2-fastapi-book-project &&
           git pull origin main &&
           python3 -m venv venv &&
           source venv/bin/activate &&
           pip3 install -r requirements.txt &&
-          sudo systemctl stop fastapi_nginx || true &&
-          sudo systemctl start fastapi_nginx &&
-          nohup uvicorn main:app --host 0.0.0.0 --port 8000 &
+          sudo systemctl daemon-reload &&
+          sudo systemctl enable fastapi-app &&
+          sudo systemctl restart fastapi-app
         EOF
