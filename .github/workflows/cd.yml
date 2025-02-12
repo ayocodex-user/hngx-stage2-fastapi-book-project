@@ -24,11 +24,12 @@ jobs:
     - name: Deploy Application to EC2
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
-          cd hngx-stage2-fastAPI-application
-          git fetch --all
-          git reset --hard origin/main
-          python3 -m venv venv
-          source venv/bin/activate
-          pip3 install -r requirements.txt
-          sudo restart hngx-stage2-fastAPI-application
+          git clone https://github.com/ojutalayomi/hngx-stage2-fastapi-book-project.git || true &&
+          cd hngx-stage2-fastAPI-application &&
+          ggit pull origin main &&
+          python3 -m venv venv &&
+          source venv/bin/activate &&
+          pip3 install -r requirements.txt &&
+          sudo systemctl stop fastapi_nginx || true &&
+          sudo systemctl start fastapi_nginx
         EOF

@@ -63,7 +63,7 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 3. Install dependencies:
 
 ```bash
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ## Running the Application
@@ -71,7 +71,7 @@ pip install -r requirements.txt
 1. Start the server:
 
 ```bash
-uvicorn main:app
+uvicorn main:app  --reload
 ```
 
 2. Access the API documentation:
@@ -128,6 +128,10 @@ The API includes proper error handling for:
 - Invalid book IDs
 - Invalid genre types
 - Malformed requests
+
+## Deployment
+- The application is automatically deployed when changes are merged into the `main` branch.
+- It is served using Nginx as a reverse proxy.
 
 ## Contributing
 
