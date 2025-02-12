@@ -26,7 +26,7 @@ jobs:
         ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
           git clone https://github.com/ojutalayomi/hngx-stage2-fastapi-book-project.git || true &&
           cd hngx-stage2-fastapi-book-project &&
-          ggit pull origin main &&
+          git pull origin main &&
           python3 -m venv venv &&
           source venv/bin/activate &&
           pip3 install -r requirements.txt &&
